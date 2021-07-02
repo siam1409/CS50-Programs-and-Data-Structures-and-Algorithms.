@@ -30,10 +30,10 @@ void build(int n, int x, int y)
     if (y == x)
     {
         printf("\n");
-        build(n, x + 1, 0);
+        return build(n, x + 1, 0);
     }
     else
     {
-        build(n, x, y);
+        return build(n, x, y);
     }
 }
