@@ -12,13 +12,13 @@ int main(void)
     while (hight < 0);
 
     // print a pyramid of that hight
-    for (int i = 0; i < hight; i++)
+    for (int i = 1; i <= hight; i++)
     {
-        for (int j = 0; j < hight - i; j++)
+        for (int j = 0; j < hight - i ; j++)
         {
             printf(" ");
         }
-        for (int k = 0; k < i + 1; k++)
+        for (int k = 0; k < i; k++)
         {
             printf("#");
         }
