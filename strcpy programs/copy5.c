@@ -13,6 +13,8 @@ int main(void)
     printf("%s\n", array2);
 
     printf("%s\n", array1);
+    
+    free(array2);
 
     return 0;
 }
