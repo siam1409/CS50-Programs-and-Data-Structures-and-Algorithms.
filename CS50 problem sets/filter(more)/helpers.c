@@ -1,9 +1,8 @@
-#include "helpers.h"
 #include <math.h>
 #include <stdio.h>
+#include "helpers.h"
 
 // Creat a struct of ints to store the channel values
-
 typedef struct
 {
     int rgbtBlue;
@@ -286,22 +285,10 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                 Gx CALCULATIONS ******************************************
             */
 
-            // Read the adjacent pixels of the current row
-            color[color_count].rgbtBlue = image[i][j].rgbtBlue * multiplier;
-            color[color_count].rgbtGreen = image[i][j].rgbtGreen * multiplier;
-            color[color_count].rgbtRed = image[i][j].rgbtRed * multiplier;
-            color_count++;
+            // Read the adjacent pixels of the current row. The values which are supposed to be multiplied by zero are avoided
 
             column = j + 1;
-            if (column > width - 1)
-            {
-                // If the new column number is past the width then accept them all as zero
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-            }
-            else
+            if (column < width)
             {
                 multiplier = 2;
                 color[color_count].rgbtBlue = image[i][column].rgbtBlue * multiplier;
@@ -312,15 +299,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             }
             column = j - 1;
 
-            if (column < 0)
-            {
-                // If the new column number is past 0 then accept them all as zero
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-            }
-            else
+            if (column > -1)
             {
                 multiplier = -2;
                 color[color_count].rgbtBlue = image[i][column].rgbtBlue * multiplier;
@@ -334,43 +313,10 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 
             // Read the adjacent pixels of the next row
             row = i + 1;
-            if (row > height - 1)
+            if (row < height)
             {
-                // If the new row number is past the height then accept them all as zero
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-            }
-            else
-            {
-                multiplier = 0;
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-
-
                 column = j + 1;
-                if (column > width - 1)
-                {
-                    // If the new column number is past the width then accept them all as zero
-                    color[color_count].rgbtBlue = 0;
-                    color[color_count].rgbtGreen = 0;
-                    color[color_count].rgbtRed = 0;
-                    color_count++;
-                }
-                else
+                if (column < width)
                 {
                     color[color_count].rgbtBlue = image[row][column].rgbtBlue;
                     color[color_count].rgbtGreen = image[row][column].rgbtGreen;
@@ -379,15 +325,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                 }
                 column = j - 1;
 
-                if (column < 0)
-                {
-                    // If the new column number is past 0 then accept them all as zero
-                    color[color_count].rgbtBlue = 0;
-                    color[color_count].rgbtGreen = 0;
-                    color[color_count].rgbtRed = 0;
-                    color_count++;
-                }
-                else
+                if (column > -1)
                 {
                     multiplier = -1;
                     color[color_count].rgbtBlue = image[row][column].rgbtBlue * multiplier;
@@ -403,42 +341,10 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 
             // Read the adjacent pixels of the previous row
             row = i - 1;
-            if (row < 0)
+            if (row > -1)
             {
-                // If the new row number is past 0 then accept them all as zero
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-            }
-            else
-            {
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-
-
                 column = j + 1;
-                if (column > width - 1)
-                {
-                    // If the new column number is past the width then accept them all as zero
-                    color[color_count].rgbtBlue = 0;
-                    color[color_count].rgbtGreen = 0;
-                    color[color_count].rgbtRed = 0;
-                    color_count++;
-                }
-                else
+                if (column < width)
                 {
                     color[color_count].rgbtBlue = image[row][column].rgbtBlue;
                     color[color_count].rgbtGreen = image[row][column].rgbtGreen;
@@ -447,15 +353,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                 }
                 column = j - 1;
 
-                if (column < 0)
-                {
-                    // If the new column number is past 0 then accept them all as zero
-                    color[color_count].rgbtBlue = 0;
-                    color[color_count].rgbtGreen = 0;
-                    color[color_count].rgbtRed = 0;
-                    color_count++;
-                }
-                else
+                if (column > -1)
                 {
                     multiplier = -1;
                     color[color_count].rgbtBlue = image[row][column].rgbtBlue * multiplier;
@@ -493,25 +391,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 
             multiplier = 0;
 
-            // Read the adjacent pixels of the current row
-            color[color_count].rgbtBlue = 0;
-            color[color_count].rgbtGreen = 0;
-            color[color_count].rgbtRed = 0;
-            color_count++;
-
-            column = j + 1;
-
-            color[color_count].rgbtBlue = 0;
-            color[color_count].rgbtGreen = 0;
-            color[color_count].rgbtRed = 0;
-            color_count++;
-
-            column = j - 1;
-
-            color[color_count].rgbtBlue = 0;
-            color[color_count].rgbtGreen = 0;
-            color[color_count].rgbtRed = 0;
-            color_count++;
+            // Read the adjacent pixels of the current row. All will be multiplied by zero, so don't need to take those
 
             column = j;
 
@@ -519,25 +399,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 
             // Read the adjacent pixels of the next row
             row = i + 1;
-            if (row > height - 1)
-            {
-                // If the new row number is past the height of the image then accept them all as zero
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-            }
-            else
+            if (row < height)
             {
                 multiplier = 2;
                 color[color_count].rgbtBlue = image[row][j].rgbtBlue * multiplier;
@@ -547,15 +409,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 
 
                 column = j + 1;
-                if (column > width - 1)
-                {
-                    // If the new column number is past the width then accept them all as zero
-                    color[color_count].rgbtBlue = 0;
-                    color[color_count].rgbtGreen = 0;
-                    color[color_count].rgbtRed = 0;
-                    color_count++;
-                }
-                else
+                if (column < width)
                 {
                     color[color_count].rgbtBlue = image[row][column].rgbtBlue;
                     color[color_count].rgbtGreen = image[row][column].rgbtGreen;
@@ -564,15 +418,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                 }
                 column = j - 1;
 
-                if (column < 0)
-                {
-                    // If the new column number is past 0 then accept them all as zero
-                    color[color_count].rgbtBlue = 0;
-                    color[color_count].rgbtGreen = 0;
-                    color[color_count].rgbtRed = 0;
-                    color_count++;
-                }
-                else
+                if (column > -1)
                 {
                     color[color_count].rgbtBlue = image[row][column].rgbtBlue;
                     color[color_count].rgbtGreen = image[row][column].rgbtGreen;
@@ -587,25 +433,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 
             // Read the adjacent pixels of the previous row
             row = i - 1;
-            if (row < 0)
-            {
-                // If the new row number is past 0 then accept them all as zero
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-
-                color[color_count].rgbtBlue = 0;
-                color[color_count].rgbtGreen = 0;
-                color[color_count].rgbtRed = 0;
-                color_count++;
-            }
-            else
+            if (row > -1)
             {
                 multiplier = -2;
                 color[color_count].rgbtBlue = image[row][j].rgbtBlue * multiplier;
@@ -615,15 +443,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 
 
                 column = j + 1;
-                if (column > width - 1)
-                {
-                    // If the new column number is past the width then accept them all as zero
-                    color[color_count].rgbtBlue = image[row][j].rgbtBlue * 0;
-                    color[color_count].rgbtGreen = image[row][j].rgbtGreen * 0;
-                    color[color_count].rgbtRed = image[row][j].rgbtRed * 0;
-                    color_count++;
-                }
-                else
+                if (column < width)
                 {
                     multiplier = -1;
                     color[color_count].rgbtBlue = image[row][column].rgbtBlue * multiplier;
@@ -633,15 +453,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                 }
                 column = j - 1;
 
-                if (column < 0)
-                {
-                    // If the new column number is past 0 then accept them all as zero
-                    color[color_count].rgbtBlue = 0;
-                    color[color_count].rgbtGreen = 0;
-                    color[color_count].rgbtRed = 0;
-                    color_count++;
-                }
-                else
+                if (column > -1)
                 {
                     multiplier = -1;
                     color[color_count].rgbtBlue = image[row][column].rgbtBlue * multiplier;
