@@ -86,7 +86,7 @@ int main(int argc, string argv[])
     else
     {
         // if the user didn't provide the at all or provided more command line arguments, then show the usage and exit with status code 1
-        printf("Usage: ./substitution KEY\n");
+        printf("Usage: ./desubstitution KEY\n");
         return 1;
     }
 }
