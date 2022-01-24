@@ -22,11 +22,17 @@ int main(int argc, string argv[])
 
             for (int i = 0; i < length; i++)
             {
+                if (start > end)
+                    {
+                        printf("not found\n");
+                        return 1;
+                    }
+
                 midindex = (start + end) / 2;
 
                 if (array[midindex] == target)
                 {
-                    printf("Found! \n");
+                    printf("Found at index %d.\n", midindex + 1);
                     return 0;
                 }
                 else if (array[midindex] > target)
@@ -42,11 +48,7 @@ int main(int argc, string argv[])
                     printf("not found\n");
                     return 1;
                 }
-                if (start > end)
-                {
-                    printf("not found\n");
-                    return 1;
-                }
+
             }
         }
         else
