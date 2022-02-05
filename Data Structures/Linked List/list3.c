@@ -72,56 +72,62 @@ int main()
 
     do
     {
-        position = get_int("At which position do you want to insert data?\n=> ");
+        position = get_int("At which position do you want to insert data? (If you don't want to do this, press 0) \n=> ");
     }
-    while (position <= 0 || position > number_of_nodes + 1);
+    while (position < 0 || position > number_of_nodes + 1);
 
-    //insert the new node into the list at user defined position
-    int i = 0;
-
-    for (node *tmp = head; tmp; tmp = tmp -> next)
+    if (position != 0)
     {
-        node *_tmp;
-        if (position == 1)
+        //insert the new node into the list at user defined position
+        int i = 0;
+        for (node *tmp = head; tmp; tmp = tmp -> next)
         {
-            _tmp = head;
-            new_node = malloc(sizeof(node));
-            new_node -> number = get_int("Number: ");
-            new_node -> next = _tmp;
-            head = new_node;
-            number_of_nodes++;
-            break;
+            node *_tmp;
+            if (position == 1)
+            {
+                _tmp = head;
+                new_node = malloc(sizeof(node));
+                new_node -> number = get_int("Number: ");
+                new_node -> next = _tmp;
+                head = new_node;
+                number_of_nodes++;
+                break;
+            }
+            else if (i == position - 2)
+            {
+                _tmp = tmp -> next;
+                new_node = malloc(sizeof(node));
+                new_node -> number = get_int("Number: ");
+                new_node -> next = _tmp;
+                tmp -> next = new_node;
+                number_of_nodes++;
+            }
+            i++;
         }
-        else if (i == position - 2)
-        {
-            _tmp = tmp -> next;
-            new_node = malloc(sizeof(node));
-            new_node -> number = get_int("Number: ");
-            new_node -> next = _tmp;
-            tmp -> next = new_node;
-            number_of_nodes++;
-        }
-        i++;
-    }
 
-    // print the new list
-    printf("\nNew list:\n");
-    for (node *tmp = head; tmp; tmp = tmp -> next)
-    {
-        printf("%d\n", tmp -> number);
+        // print the new list
+        printf("\nNew list:\n");
+        for (node *tmp = head; tmp; tmp = tmp -> next)
+        {
+            printf("%d\n", tmp -> number);
+        }
+        printf("\n");
     }
-    printf("\n");
+    else
+    {
+        printf("\n");
+    }
 
         //
             //    DATA DELETION
         //
 
-    int choice;
+    int choice = 0;
     do
     {
-        choice = get_int("According to what you want to delete data?\n1.Position\n2.Number\n=> ");
+        choice = get_int("According to what you want to delete data? (If you don't want to do this, press 0)\n1.Position\n2.Number\n=> ");
     }
-    while (choice < 1 || choice > 2);
+    while (choice < 0 || choice > 2);
 
     bool deleted = false;
 
@@ -134,7 +140,7 @@ int main()
             del_pos = get_int("Enter the position from which you want to delete number: ");
         }
         while (del_pos < 1 || del_pos > number_of_nodes);
-        i = 0;
+        int i = 0;
         // delete the data from the given position
         for (node *tmp = head, *_tmp = head -> next; tmp; tmp = tmp -> next, _tmp = _tmp -> next, i++)
         {
@@ -155,7 +161,7 @@ int main()
             }
         }
     }
-    else
+    else if (choice == 2)
     {
         //the number which user wants to delete from the list
         int del_number = get_int("Enter the number you want to delete from the list: ");
@@ -194,11 +200,15 @@ int main()
             }
         }
     }
+    else
+    {
+        deleted = true;
+    }
 
     if (deleted)
     {
         // print the new list
-        printf("\nNew list:\n");
+        printf("\nFinal list:\n");
         for (node *tmp = head; tmp; tmp = tmp -> next)
         {
             printf("%d\n", tmp -> number);
@@ -217,5 +227,6 @@ int main()
         free(head);
         head = tmp;
     }
+
     return 0;
 }
