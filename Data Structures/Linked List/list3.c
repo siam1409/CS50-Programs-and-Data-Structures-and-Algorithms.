@@ -165,6 +165,8 @@ int main()
     {
         //the number which user wants to delete from the list
         int del_number = get_int("Enter the number you want to delete from the list: ");
+        
+        // delete that number from the list
         for (node *tmp = head, *_tmp = head -> next; _tmp; _tmp = tmp -> next)
         {
             // if the number is at the beginning
@@ -174,26 +176,26 @@ int main()
                 deleted = true;
                 head = _tmp;
                 tmp = _tmp;
-                break;
             }
             else if (_tmp -> number == del_number)
             {
+                // make sure _tmp is not NULL, to avoid segementation fault
                 if (_tmp -> next != NULL)
                 {
                     tmp -> next = _tmp -> next;
                     free(_tmp);
                     deleted = true;
-                    break;
                 }
+                // if _tmp is NULL, we've reached the ending of the list
                 else
                 {
                     tmp -> next = NULL;
                     free(_tmp);
                     deleted = true;
                     _tmp = NULL;
-                    break;
                 }
             }
+            // update tmp iff it holds a valid memory adress
             if (tmp -> next != NULL)
             {
                 tmp = tmp -> next;
