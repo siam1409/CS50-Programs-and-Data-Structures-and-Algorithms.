@@ -21,9 +21,9 @@ int main()
     }
     while (number_of_nodes <= 0);
 
-        //
-            //    LINKED LIST CREATIION
-        //
+    //
+    //    LINKED LIST CREATIION
+    //
 
     node *head = NULL, *new_node = NULL;
 
@@ -63,9 +63,9 @@ int main()
     }
     printf("\n");
 
-        //
-            //    DATA INSERTION
-        //
+    //
+    //    DATA INSERTION
+    //
 
     //the posiiton at which user wants to insert data
     int position = 0;
@@ -118,9 +118,9 @@ int main()
         printf("\n");
     }
 
-        //
-            //    DATA DELETION
-        //
+    //
+    //    DATA DELETION
+    //
 
     int choice = 0;
     do
