@@ -138,7 +138,7 @@ void create_list()
         if (!new_node)
         {
             malloc_err = true;
-            break;
+            return;
         }
         new_node -> number = get_int("Number: ");
         new_node -> next = NULL;
@@ -190,7 +190,7 @@ void insert_at_position(int position)
             if (!new_node)
             {
                 malloc_err = true;
-                break;
+                return;
             }
             new_node -> number = get_int("Number: ");
             new_node -> next = _tmp;
@@ -205,7 +205,7 @@ void insert_at_position(int position)
             if (!new_node)
             {
                 malloc_err = true;
-                break;
+                return;
             }
             new_node -> number = get_int("Number: ");
             new_node -> next = _tmp;
