@@ -25,6 +25,7 @@ int main()
     // reverse the list
     reverse_list();
 
+    // pass a success message
     printf("Reversed the list successfully!\n");
 
     // print the list
