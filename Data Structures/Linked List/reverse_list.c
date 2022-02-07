@@ -19,6 +19,9 @@ int main()
         return 1;
     }
 
+    // print the list
+    print_list();
+
     // reverse the list
     reverse_list();
 
